@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return int
  */
 function novashop_loop_columns() {
-	return 4;
+	return absint( novashop_get_theme_option( 'loop_columns' ) );
 }
 add_filter( 'loop_shop_columns', 'novashop_loop_columns' );
 
@@ -25,7 +25,7 @@ add_filter( 'loop_shop_columns', 'novashop_loop_columns' );
  * @return int
  */
 function novashop_products_per_page() {
-	return 12;
+	return absint( novashop_get_theme_option( 'products_per_page' ) );
 }
 add_filter( 'loop_shop_per_page', 'novashop_products_per_page' );
 
@@ -76,7 +76,7 @@ function novashop_account_link() {
 		return;
 	}
 	?>
-	<a class="novashop-account-link" href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>">
+	<a class="novashop-account-link" href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>">
 		<?php esc_html_e( 'Account', 'novashop' ); ?>
 	</a>
 	<?php

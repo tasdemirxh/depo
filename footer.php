@@ -7,26 +7,7 @@
 
 ?>
 <footer class="site-footer">
-	<div class="novashop-container site-footer__grid">
-		<div class="site-footer__brand">
-			<?php if ( has_custom_logo() ) : ?>
-				<?php the_custom_logo(); ?>
-			<?php else : ?>
-				<h2><?php bloginfo( 'name' ); ?></h2>
-			<?php endif; ?>
-			<p><?php echo esc_html( novashop_get_option( 'footer_text' ) ); ?></p>
-		</div>
-
-		<?php for ( $index = 1; $index <= 3; $index++ ) : ?>
-			<div class="site-footer__column">
-				<?php
-				if ( is_active_sidebar( 'footer-' . $index ) ) {
-					dynamic_sidebar( 'footer-' . $index );
-				}
-				?>
-			</div>
-		<?php endfor; ?>
-	</div>
+	<?php novashop_render_footer_builder(); ?>
 
 	<div class="site-footer__bottom">
 		<div class="novashop-container">

@@ -62,32 +62,20 @@ function novashop_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
 
-	register_sidebar( array(
-		'name'          => __( 'Footer column 1', 'novashop' ),
-		'id'            => 'footer-1',
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Footer column 2', 'novashop' ),
-		'id'            => 'footer-2',
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Footer column 3', 'novashop' ),
-		'id'            => 'footer-3',
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+	for ( $index = 1; $index <= 4; $index++ ) {
+		register_sidebar( array(
+			'name'          => sprintf(
+				/* translators: %d: footer column number */
+				__( 'Footer column %d', 'novashop' ),
+				$index
+			),
+			'id'            => 'footer-' . $index,
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) );
+	}
 }
 add_action( 'widgets_init', 'novashop_widgets_init' );
 
@@ -108,6 +96,20 @@ function novashop_scripts() {
 		array(),
 		NOVASHOP_VERSION,
 		true
+	);
+
+	wp_localize_script(
+		'novashop-theme',
+		'NovaShopTheme',
+		array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'novashop_storefront' ),
+			'i18n'    => array(
+				'loading' => __( 'Loading...', 'novashop' ),
+				'error'   => __( 'Something went wrong. Please try again.', 'novashop' ),
+				'close'   => __( 'Close', 'novashop' ),
+			),
+		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'novashop_scripts' );

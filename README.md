@@ -23,6 +23,15 @@ NovaShop Commerce, WooCommerce odakli modern bir WordPress tema baslangicidir. W
 - Kampanya/promo kartlari
 - Footer widget alanlari
 - Magaza sidebar alani
+- Gelismis tema ayar paneli
+- Mega menu yonetim alanlari
+- Wishlist ve compare koleksiyonlari
+- Urun hizli gorunum AJAX modali
+- AJAX urun filtreleri
+- Elementor aktifken NovaShop Product Grid widget'i
+- Demo import sistemi
+- Header/footer builder ayarlari
+- Fashion ve Electronics demo ana sayfa sablonlari
 - Blog, sayfa, arsiv, arama ve 404 sablonlari
 
 ## Kurulum
@@ -33,6 +42,22 @@ NovaShop Commerce, WooCommerce odakli modern bir WordPress tema baslangicidir. W
 4. WooCommerce eklentisini kurup etkinlestirin.
 5. **Gorunum > Ozellestir** alanindan tema renklerini, hero metinlerini ve header/footer ayarlarini duzenleyin.
 6. **Gorunum > Menuler** alanindan Primary, Secondary ve Footer menu konumlarini atayin.
+7. **Gorunum > NovaShop Settings** alanindan gelismis ozellikleri acip kapatin.
+
+## Kisa kodlar
+
+- `[novashop_wishlist]`: ziyaretcinin wishlist urunlerini listeler.
+- `[novashop_compare]`: ziyaretcinin compare urunlerini listeler.
+- `[novashop_collection type="wishlist"]`: belirli koleksiyonu listeler.
+- `[novashop_ajax_filters]`: kategori, fiyat ve siralama alanlari olan AJAX urun filtre formu gosterir.
+
+## Guvenlik notlari
+
+- AJAX islemleri WordPress nonce kontrolu kullanir.
+- Admin islemleri `edit_theme_options` yetkisi ister.
+- Urun ID'leri WooCommerce urun nesnesi ve yayin durumu ile dogrulanir.
+- Misafir wishlist/compare verileri yalnizca sanitize edilmis urun ID listesi olarak HttpOnly cookie'de tutulur.
+- Demo import islemi nonce korumalidir ve mevcut sayfalari slug uzerinden tekrar kullanir.
 
 ## Dosya yapisi
 
@@ -49,12 +74,22 @@ NovaShop Commerce, WooCommerce odakli modern bir WordPress tema baslangicidir. W
 ├── functions.php
 ├── header.php
 ├── inc/
+│   ├── ajax-filters.php
+│   ├── builders.php
+│   ├── commerce-actions.php
 │   ├── customizer.php
+│   ├── demo-import.php
+│   ├── elementor.php
+│   ├── mega-menu.php
+│   ├── settings.php
 │   ├── setup.php
 │   ├── template-functions.php
 │   └── woocommerce.php
 ├── index.php
 ├── page.php
+├── page-templates/
+│   ├── home-electronics.php
+│   └── home-fashion.php
 ├── search.php
 ├── searchform.php
 ├── single.php
@@ -68,12 +103,8 @@ NovaShop Commerce, WooCommerce odakli modern bir WordPress tema baslangicidir. W
 
 ## Sonraki gelistirme alanlari
 
-- Mega menu yonetimi
-- Wishlist ve compare ozellikleri
-- AJAX urun filtreleri
-- Elementor widget destegi
-- Demo import sistemi
-- Gelismis tema ayar paneli
-- Urun hizli gorunum modali
-- Header/footer builder
-- Coklu demo ana sayfa sablonlari
+- Tasarim/stil iyilestirmeleri
+- Wishlist ve compare icin gelismis tablo gorunumu
+- Filtrelerde pagination ve attribute filtreleri
+- Header/footer builder icin surukle-birak arayuzu
+- Demo import icin ornek urun ve medya setleri

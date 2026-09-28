@@ -4,7 +4,7 @@ Theme URI: https://example.com/novashop-commerce
 Author: Cursor
 Author URI: https://cursor.com
 Description: A modern WooCommerce storefront starter inspired by premium marketplace themes, built with responsive navigation, merchandising sections, Customizer controls, and product-card styling.
-Version: 0.1.0
+Version: 0.2.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -223,10 +223,15 @@ button:focus,
 
 .site-header__inner {
 	align-items: center;
+	min-height: 82px;
+}
+
+.site-header__builder {
+	align-items: center;
 	display: grid;
 	gap: 1.5rem;
 	grid-template-columns: auto 1fr auto;
-	min-height: 82px;
+	width: 100%;
 }
 
 .site-branding {
@@ -254,6 +259,10 @@ button:focus,
 }
 
 .site-navigation {
+	justify-self: center;
+}
+
+.site-header__nav-zone {
 	justify-self: center;
 }
 
@@ -301,7 +310,8 @@ button:focus,
 .site-search-toggle,
 .site-nav-toggle,
 .novashop-account-link,
-.novashop-cart-link {
+.novashop-cart-link,
+.novashop-collection-link {
 	background: #fff;
 	border: 1px solid var(--novashop-border);
 	border-radius: 999px;
@@ -323,13 +333,15 @@ button:focus,
 	width: 18px;
 }
 
-.novashop-cart-link {
+.novashop-cart-link,
+.novashop-collection-link {
 	align-items: center;
 	display: inline-flex;
 	gap: 0.55rem;
 }
 
-.novashop-cart-link strong {
+.novashop-cart-link strong,
+.novashop-collection-link strong {
 	background: var(--novashop-accent);
 	border-radius: 999px;
 	color: #fff;
@@ -343,6 +355,30 @@ button:focus,
 .site-search-panel {
 	border-top: 1px solid var(--novashop-border);
 	padding-block: 1rem;
+}
+
+.menu-item-novashop-mega > ul {
+	gap: 0.4rem 1rem;
+	min-width: min(720px, calc(100vw - 2rem));
+}
+
+.menu-item-novashop-mega-2 > ul {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.menu-item-novashop-mega-3 > ul {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.menu-item-novashop-mega-4 > ul,
+.menu-item-novashop-mega-5 > ul,
+.menu-item-novashop-mega-6 > ul {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.menu-item-novashop-mega:hover > ul,
+.menu-item-novashop-mega:focus-within > ul {
+	display: grid;
 }
 
 .site-search-panel form,
@@ -561,6 +597,109 @@ button:focus,
 	color: var(--novashop-muted);
 }
 
+.novashop-product-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	margin-top: 0.8rem;
+}
+
+.novashop-action-button {
+	background: #fff;
+	border: 1px solid var(--novashop-border);
+	color: var(--novashop-text);
+	font-size: 0.78rem;
+	padding: 0.55rem 0.7rem;
+}
+
+.novashop-action-button.is-active {
+	background: var(--novashop-text);
+	color: #fff;
+}
+
+.novashop-ajax-products__filters {
+	align-items: end;
+	background: #fff;
+	border: 1px solid var(--novashop-border);
+	border-radius: var(--novashop-radius);
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+}
+
+.novashop-ajax-products__filters label {
+	display: block;
+	font-size: 0.78rem;
+	font-weight: 900;
+	margin-bottom: 0.35rem;
+	text-transform: uppercase;
+}
+
+.novashop-ajax-products__filters.is-loading {
+	opacity: 0.62;
+	pointer-events: none;
+}
+
+.novashop-collection__grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.novashop-collection-card {
+	background: #fff;
+	border: 1px solid var(--novashop-border);
+	border-radius: 18px;
+	padding: 1rem;
+}
+
+.novashop-collection-card h2 {
+	font-size: 1rem;
+	line-height: 1.25;
+}
+
+.novashop-modal[hidden] {
+	display: none;
+}
+
+.novashop-modal {
+	inset: 0;
+	position: fixed;
+	z-index: 9999;
+}
+
+.novashop-modal__overlay {
+	background: rgba(0, 0, 0, 0.56);
+	inset: 0;
+	position: absolute;
+}
+
+.novashop-modal__dialog {
+	background: #fff;
+	border-radius: var(--novashop-radius);
+	left: 50%;
+	max-height: calc(100vh - 3rem);
+	max-width: 860px;
+	overflow: auto;
+	padding: 1.25rem;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(100vw - 2rem);
+}
+
+.novashop-modal__close {
+	float: right;
+}
+
+.novashop-quick-view {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+}
+
 .novashop-post-grid {
 	display: grid;
 	gap: 1.5rem;
@@ -678,6 +817,18 @@ button:focus,
 .site-footer__grid {
 	grid-template-columns: 1.5fr repeat(3, minmax(0, 1fr));
 	padding-block: 4rem;
+}
+
+.site-footer__grid--columns-1 {
+	grid-template-columns: 1.5fr 1fr;
+}
+
+.site-footer__grid--columns-2 {
+	grid-template-columns: 1.5fr repeat(2, minmax(0, 1fr));
+}
+
+.site-footer__grid--columns-4 {
+	grid-template-columns: 1.5fr repeat(4, minmax(0, 1fr));
 }
 
 .site-footer a:hover,
@@ -831,6 +982,10 @@ button:focus,
 
 @media (max-width: 1024px) {
 	.site-header__inner {
+		min-height: auto;
+	}
+
+	.site-header__builder {
 		grid-template-columns: auto auto 1fr;
 	}
 
@@ -843,9 +998,14 @@ button:focus,
 		background: #fff;
 		border-bottom: 1px solid var(--novashop-border);
 		display: none;
-		grid-column: 1 / -1;
 		justify-self: stretch;
 		padding: 1rem 0;
+	}
+
+	.site-header__nav-zone {
+		grid-column: 1 / -1;
+		justify-self: stretch;
+		width: 100%;
 	}
 
 	.site-navigation.is-open {
@@ -871,7 +1031,8 @@ button:focus,
 
 	.novashop-hero__inner,
 	.site-footer__grid,
-	.novashop-post-grid {
+	.novashop-post-grid,
+	.novashop-ajax-products__filters {
 		grid-template-columns: 1fr;
 	}
 
@@ -897,6 +1058,9 @@ button:focus,
 
 	.site-header__inner {
 		gap: 0.75rem;
+	}
+
+	.site-header__builder {
 		grid-template-columns: 1fr auto;
 	}
 
@@ -908,6 +1072,7 @@ button:focus,
 	.site-header__actions {
 		grid-column: 1 / -1;
 		justify-content: stretch;
+		overflow-x: auto;
 	}
 
 	.site-header__actions > * {
@@ -924,7 +1089,9 @@ button:focus,
 
 	.novashop-promo-grid,
 	.novashop-benefits__grid,
-	.woocommerce ul.products {
+	.woocommerce ul.products,
+	.novashop-collection__grid,
+	.novashop-quick-view {
 		grid-template-columns: 1fr;
 	}
 

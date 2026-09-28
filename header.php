@@ -37,59 +37,7 @@
 
 	<div class="site-header__main">
 		<div class="novashop-container site-header__inner">
-			<div class="site-branding">
-				<?php
-				if ( has_custom_logo() ) {
-					the_custom_logo();
-				} else {
-					if ( is_front_page() && is_home() ) {
-						?>
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-						<?php
-					} else {
-						?>
-						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></p>
-						<?php
-					}
-
-					$description = get_bloginfo( 'description', 'display' );
-					if ( $description || is_customize_preview() ) {
-						?>
-						<p class="site-description"><?php echo esc_html( $description ); ?></p>
-						<?php
-					}
-				}
-				?>
-			</div>
-
-			<button class="site-nav-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-				<span></span>
-				<span></span>
-				<span></span>
-				<?php esc_html_e( 'Menu', 'novashop' ); ?>
-			</button>
-
-			<nav class="site-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'novashop' ); ?>">
-				<?php
-				wp_nav_menu( array(
-					'theme_location' => 'primary',
-					'container'      => false,
-					'menu_id'        => 'primary-menu',
-					'menu_class'     => 'primary-menu',
-					'fallback_cb'    => 'wp_page_menu',
-				) );
-				?>
-			</nav>
-
-			<div class="site-header__actions">
-				<button class="site-search-toggle" type="button" aria-expanded="false" aria-controls="site-search-panel">
-					<?php esc_html_e( 'Search', 'novashop' ); ?>
-				</button>
-				<?php
-				novashop_account_link();
-				novashop_cart_link();
-				?>
-			</div>
+			<?php novashop_render_header_builder(); ?>
 		</div>
 	</div>
 
